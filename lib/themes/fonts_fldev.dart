@@ -15,3 +15,8 @@ final black600 = GoogleFonts.roboto(
   fontWeight: FontWeight.w600,
   color: Colors.black,
 );
+
+final black700 = GoogleFonts.roboto(
+  fontWeight: FontWeight.w700,
+  color: Colors.black,
+);
