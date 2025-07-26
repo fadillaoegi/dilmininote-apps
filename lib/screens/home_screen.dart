@@ -7,24 +7,75 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sizeScreen = MediaQuery.of(context).size;
+    final titleC = TextEditingController();
+    final contentC = TextEditingController();
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text("Dil~mininote", style: blue400.copyWith(fontSize: 26.0)),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (context) {
               return AlertDialog(
                 content: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text(
-                        "Write note",
-                        style: black600.copyWith(fontSize: 18),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(hintText: "Write note"),
-                      ),
-                    ],
+                  child: SizedBox(
+                    width: sizeScreen.width * 0.8,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Write note",
+                          style: black600.copyWith(fontSize: 18),
+                        ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          controller: titleC,
+                          decoration: InputDecoration(
+                            hintText: "Title Note",
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: contentC,
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                            hintText: "Content Note",
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () => Navigator.pop(context),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent,
+                              ),
+                              child: Text(
+                                "Cancel",
+                                style: white400.copyWith(fontSize: 14.0),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blueAccent,
+                              ),
+                              child: Text(
+                                "Save",
+                                style: white400.copyWith(fontSize: 14.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -56,23 +107,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                     trailing: InkWell(
                       onTap: () {
-                        print("Deleted");
+                        _deleteDialog(context);
                       },
-                      child: InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                content: SingleChildScrollView(
-                                  child: Column(children: []),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Icon(Icons.delete, color: Colors.red),
-                      ),
+                      child: Icon(Icons.delete, color: Colors.red, size: 30.0),
                     ),
                   ),
                 ),
@@ -81,6 +118,47 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+   _deleteDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  "Are you sure you want to delete this note?",
+                  style: black400.copyWith(fontSize: 18),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                      ),
+                      child: Text("Cancel", style: white600),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.lightGreen,
+                      ),
+                      child: Text("Yes", style: white600),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

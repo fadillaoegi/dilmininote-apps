@@ -1,4 +1,4 @@
-import 'package:dilmininote/data/database.dart';
+// import 'package:dilmininote/data/database.dart';
 import 'package:dilmininote/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
