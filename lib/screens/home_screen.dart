@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
               return AlertDialog(
                 content: SingleChildScrollView(
                   child: SizedBox(
-                    width: sizeScreen.width * 0.8,
+                    width: sizeScreen.width * 0.8,  
                     child: Column(
                       children: [
                         Text(
@@ -89,39 +89,47 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           width: sizeScreen.width,
           height: sizeScreen.height,
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(14),
-                  child: ListTile(
-                    title: Text(
-                      'title',
-                      style: black500.copyWith(fontSize: 22),
-                    ),
-                    subtitle: Text(
-                      "Subtitle",
-                      style: black400.copyWith(fontSize: 18),
-                    ),
-                    trailing: InkWell(
-                      onTap: () {
-                        _deleteDialog(context);
-                      },
-                      child: Icon(Icons.delete, color: Colors.red, size: 30.0),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Notes", style: black500.copyWith(fontSize: 22)),
+                const SizedBox(height: 10),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(14),
+                    child: ListTile(
+                      title: Text(
+                        'title',
+                        style: black500.copyWith(fontSize: 20.0),
+                      ),
+                      subtitle: Text(
+                        "Subtitle",
+                        style: black400.copyWith(fontSize: 16.0),
+                      ),
+                      trailing: InkWell(
+                        onTap: () {
+                          _deleteDialog(context);
+                        },
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                          size: 30.0,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-   _deleteDialog(BuildContext context) {
+  _deleteDialog(BuildContext context) {
     return showDialog(
       context: context,
       barrierDismissible: false,
